@@ -70,65 +70,65 @@ const HomePage = () => {
           </select>
         </div>
         {/* Main Card Div Start */}
-        <div class="grid grid-cols-3 gap-6">
-          <div class="rounded-lg overflow-hidden shadow-lg">
+        <div className="grid grid-cols-3 gap-6">
+          <div className="rounded-lg overflow-hidden shadow-lg">
             <img
-              class="w-full h-48 object-cover"
+              className="w-full h-48 object-cover"
               src="./First.jpg"
               alt="Blog Image 1"
             />
-            <div class="p-6">
-              <h2 class="text-lg font-medium mb-2">Blog Post 1</h2>
-              <p class="text-gray-600">
+            <div className="p-6">
+              <h2 className="text-lg font-medium mb-2">Blog Post 1</h2>
+              <p className="text-gray-600">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel
                 nunc nec sapien efficitur sollicitudin. Integer in turpis vitae
                 massa accumsan rhoncus.
               </p>
               <a
                 href="/Blogdetails"
-                class="text-blue-600 font-medium mt-4 inline-block hover:underline"
+                className="text-blue-600 font-medium mt-4 inline-block hover:underline"
               >
                 Read More
               </a>
             </div>
           </div>
-          <div class="rounded-lg overflow-hidden shadow-lg">
+          <div className="rounded-lg overflow-hidden shadow-lg">
             <img
-              class="w-full h-48 object-cover"
+              className="w-full h-48 object-cover"
               src="./First.jpg"
               alt="Blog Image 2"
             />
-            <div class="p-6">
-              <h2 class="text-lg font-medium mb-2">Blog Post 2</h2>
-              <p class="text-gray-600">
+            <div className="p-6">
+              <h2 className="text-lg font-medium mb-2">Blog Post 2</h2>
+              <p className="text-gray-600">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel
                 nunc nec sapien efficitur sollicitudin. Integer in turpis vitae
                 massa accumsan rhoncus.
               </p>
               <a
                 href="/Blogdetails"
-                class="text-blue-600 font-medium mt-4 inline-block hover:underline"
+                className="text-blue-600 font-medium mt-4 inline-block hover:underline"
               >
                 Read More
               </a>
             </div>
           </div>
-          <div class="rounded-lg overflow-hidden shadow-lg">
+          <div className="rounded-lg overflow-hidden shadow-lg">
             <img
-              class="w-full h-48 object-cover"
+              className="w-full h-48 object-cover"
               src="./First.jpg"
               alt="Blog Image 3"
             />
-            <div class="p-6">
-              <h2 class="text-lg font-medium mb-2">Blog Post 3</h2>
-              <p class="text-gray-600">
+            <div className="p-6">
+              <h2 className="text-lg font-medium mb-2">Blog Post 3</h2>
+              <p className="text-gray-600">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel
                 nunc nec sapien efficitur sollicitudin. Integer in turpis vitae
                 massa accumsan rhoncus.
               </p>
               <a
                 href="/Blogdetails"
-                class="text-blue-600 font-medium mt-4 inline-block hover:underline"
+                className="text-blue-600 font-medium mt-4 inline-block hover:underline"
               >
                 Read More
               </a>

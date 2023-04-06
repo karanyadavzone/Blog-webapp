@@ -1,71 +1,41 @@
 "use client";
 import React from "react";
-import { useState } from "react";
-// import QuillNoSSRWrapper from "./Editor/Editor";
-import "react-quill/dist/quill.snow.css";
-import dynamic from 'next/dynamic'
+import { useState } from "react"; 
 import { AiOutlineArrowLeft } from "react-icons/ai";
-
-
+import ReactQuillEditor from "../components/TextEditor"
 const Createform = () => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
+  const [content, setContent] = useState("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Handle form submission here
+    // Handle form submission her
+    try {
+      const response = await fetch("/api/posts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title, author, content }),
+      });
+      if (response.ok) {
+        router.push("/");
+      } else {
+        console.error("Error creating post:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error creating post:", error);
+    }
   };
 
-  const QuillNoSSRWrapper = dynamic(import("react-quill"), {
-    ssr: false,
-    loading: () => <p>Loading ...</p>,
-  });
-  const modules = {
-    toolbar: [
-      [{ header: '1' }, { header: '2' }, { font: [] }],
-      [{ size: [] }],
-      ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-      [
-        { list: 'ordered' },
-        { list: 'bullet' },
-        { indent: '-1' },
-        { indent: '+1' },
-      ],
-      ['link', 'image', 'video'],
-      ['clean'],
-    ],
-    clipboard: {
-      // toggle to add extra line breaks when pasting HTML:
-      matchVisual: false,
-    },
-  }
-  /*
-   * Quill editor formats
-   * See https://quilljs.com/docs/formats/
-   */
-  const formats = [
-    'header',
-    'font',
-    'size',
-    'bold',
-    'italic',
-    'underline',
-    'strike',
-    'blockquote',
-    'list',
-    'bullet',
-    'indent',
-    'link',
-    'image',
-    'video',
-  ]
+ 
   return (
     <div className="p-8 ml-44 mt-24 mb-12">
       <a href="/" className="flex gap-2 items-center mb-4">
-          <AiOutlineArrowLeft className="items-center" />Back
-        </a>
+        <AiOutlineArrowLeft className="items-center" />
+        Back
+      </a>
       <div className="text-3xl mb-2">Create Blog</div>
-      <form onSubmit={handleSubmit}  className="mt-4">
+      <form onSubmit={handleSubmit} className="mt-4">
         <div className="mb-4">
           <label htmlFor="title" className="block text-gray-700 font-bold mb-2">
             Title
@@ -98,7 +68,8 @@ const Createform = () => {
           />
         </div>
         <div id="editor"></div>
-        <QuillNoSSRWrapper modules={modules} formats={formats} theme="snow" className="mb-4 h-52 w-4/6"/>
+        
+        {/* <ReactQuillEditor setContent={setContent}/> */}
         <div className="flex items-center justify-between ">
           <button
             type="submit"
