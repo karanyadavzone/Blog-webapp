@@ -1,12 +1,30 @@
 "use client";
 import React from "react";
-import { useState } from "react"; 
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import dynamic from 'next/dynamic';
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import ReactQuillEditor from "../components/TextEditor"
+const Editor = dynamic(() => import('../components/TextEditor'), { ssr: false });
+
 const Createform = () => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
-  const [content, setContent] = useState("");
+  const [content, setContent] = useState('');
+  const [category,setCategory] = useState('');
+  const router = useRouter();
+  const handleEditorChange = (value) => {
+    setContent(value);
+  };
+  const handleCategory= (e)=>{
+    setCategory(e.target.value)
+  }
+
+  useEffect(() => {
+    // Only run this code on the client-side
+    if (typeof window !== 'undefined') {
+      setContent(content) 
+    }
+  }, [content]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -15,10 +33,13 @@ const Createform = () => {
       const response = await fetch("/api/posts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ title, author, content }),
+        body: JSON.stringify({ title, author, content ,category}),
       });
-      if (response.ok) {
+      if (response) {
         router.push("/");
+        setTitle('');
+        setAuthor('');
+        setContent('');
       } else {
         console.error("Error creating post:", response.statusText);
       }
@@ -67,9 +88,31 @@ const Createform = () => {
             required
           />
         </div>
-        <div id="editor"></div>
-        
-        {/* <ReactQuillEditor setContent={setContent}/> */}
+        <div className="mb-4">
+          <label
+            htmlFor="category"
+            className="block text-gray-700 font-bold mb-2"
+          >
+            Category
+          </label>
+          <select
+              className="border rounded w-3/6 border-gray-300 bg-white h-10 px-5  text-sm focus:outline-none "
+              value={category}
+              onChange={handleCategory}
+            >
+              <option value="all">All Categories</option>
+              <option value="technology">Technology</option>
+              <option value="lifestyle">Lifestyle</option>
+              <option value="food">Food</option>
+              <option value="travel">Travel</option>
+            </select>
+        </div>
+        <label
+            className="block text-gray-700 font-bold mb-2"
+          >
+            Content
+          </label>
+        <Editor value={content} onChange={handleEditorChange}/>
         <div className="flex items-center justify-between ">
           <button
             type="submit"

@@ -1,21 +1,30 @@
-// "use client"
-import { useState } from 'react';
-// import ReactQuill from 'react-quill';
-// import 'react-quill/dist/quill.snow.css';
+"use client"
+import dynamic from 'next/dynamic';
 
-// const ReactQuillEditor = () => {
-//   const [content, setContent] = useState('');
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
+import 'react-quill/dist/quill.snow.css';
 
-//   const handleTextChange = (value) => {
-//     setContent(value);
-//   };
+function Editor({ value, onChange }) {
+  const handleChange = (content, delta, source, editor) => {
+    onChange(content);
+  };
 
-//   return (
-//     <ReactQuill
-//       value={content}
-//       onChange={handleTextChange}
-//     />
-//   );
-// };
+  return (
+    <ReactQuill
+      value={value}
+      onChange={handleChange}
+      modules={{
+        toolbar: [
+          [{ header: [1, 2, false] }],
+          ['bold', 'italic', 'underline', 'strike'],
+          [{ list: 'ordered' }, { list: 'bullet' }],
+          ['link', 'image'],
+          ['clean']
+        ]
+      }}
+      placeholder="Write something amazing..."
+    />
+  );
+}
 
-// export default ReactQuillEditor;
+export default Editor;

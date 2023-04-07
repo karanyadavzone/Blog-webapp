@@ -1,20 +1,23 @@
-import connectDB from '../../utils/db';
-import Post from '../../models/Blogs';
+ import { connectToDatabase, collection } from '../../db'; 
+ async function handler(req, res) {
+  const { title, author,content,category } = req.body;
+ 
+   try {
+     await connectToDatabase();
+ 
+     const result = await collection.insertOne({
+      title,
+      author,
+      content: content,
+      category:category,
+      date: new Date(),
+    });
+     res.status(201).json({ message: 'Document created successfully', documentId: result.insertedId });
+   } catch (error) {
+     res.status(500).json({ message: 'Error creating document' });
+   }
+ }
+ 
+ 
 
-const handler = async (req, res) => {
-    if (req.method === 'POST') {
-      try {
-        const { title, author,content } = req.body;
-        const post = new Post({ title,author, content });
-        const result = await post.save();
-        res.status(201).json(result);
-      } catch (error) {
-        res.status(500).json({ message: 'Error creating post' });
-      }
-    } else {
-      res.status(400).json({ message: 'Invalid request method' });
-    }
-  };
-
-
- export default connectDB(handler);
+export default handler;

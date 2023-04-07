@@ -2,13 +2,16 @@
 import React from "react";
 import { useState } from "react";
 import Comment from "./api/comments";
+import { useRouter } from 'next/router';
 import axios from "axios";
 import { BsFillArrowLeftCircleFill, AiOutlineArrowLeft } from "react-icons/ai";
 
 function BlogDetails(post) {
   const [name, setName] = useState("");
   const [comment, setComment] = useState("");
-
+  const router = useRouter();
+  const blogData = router.query.blogData;
+  console.log(blogData,'bdta')
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -29,10 +32,10 @@ function BlogDetails(post) {
           <AiOutlineArrowLeft className="items-center" />Back
         </a>
         <h1 className="text-3xl font-bold text-gray-900 mb-4">
-          Blog post title
+          {blogData?.title}
         </h1>
         <p className="text-gray-500 mb-4">
-          Written by John Doe on April 2, 2023
+          Written by {blogData?.author},{blogData?.category} on {blogData?.date}
         </p>
         <img src="./First.jpg" alt="Blog post" className="mb-4" />
         <p className="text-lg text-gray-900 mb-4">
