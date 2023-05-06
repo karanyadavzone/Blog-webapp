@@ -46,19 +46,28 @@ const HomePage = () => {
               allows you to render your pages on
             </p>
             <Link href="/Blogdetails">
-              <button className="mt-8 bg-black hover:bg-blue-700 mb-5 text-white font-semibold py-2 px-4 rounded">
+              {/* <button className="mt-8 bg-black hover:bg-blue-700 mb-5 text-white font-semibold py-2 px-4 rounded">
                 Read Now
+              </button> */}
+              {/* <button  class="custom-btn btn-12"><span>Click!</span><span>Read Moreee</span></button> */}
+              <button className="custom-btn btn-12 mt-8 mb-8 font-semibold py-2 px-4 rounded-xl">
+                <span>Click!</span>
+                <span>Read Moreee</span>
               </button>
             </Link>
             {/* Second Left Side Card */}
           </div>
           <div className="w-full">
-            <img className="ml-28 p-3 w-10/12 rounded-3xl" src="./First.jpg" />
+            <img
+              className="ml-28 p-3 w-10/12 rounded-3xl h-[400px]"
+              src="./First.jpg"
+            />
           </div>
         </div>
       </div>
       {/* Body */}
       <div className="ml-40 mr-40 pb-8">
+        
         {/* Filter Search Div */}
         {data?.length !== 0 && (
           <div className="flex items-center mb-10">
@@ -95,22 +104,23 @@ const HomePage = () => {
                   ?.toLowerCase()
                   .includes(searchTerm.toLowerCase()) ||
                 data?.category?.toLowerCase().includes(filter.toLowerCase())
-              );
+              )
             })
             ?.map((blog) => {
               return (
+                <>
                 <div className="rounded-lg overflow-hidden shadow-lg">
                   <img
-                    className="w-full h-48 object-cover"
+                    className="w-full h-[300px] object-cover"
                     src="./First.jpg"
                     alt="Blog Image 1"
                   />
                   <div className="p-6">
                     <h2 className="text-lg font-medium mb-2">{blog?.title}</h2>
                     <p
-                      className="text-gray-600 whitespace-pre overflow-hidden text-ellipsis"
-                      dangerouslySetInnerHTML={{ __html: blog?.content }}
-                    ></p>
+                      className="text-gray-600 w-50 border overflow-hidden whitespace-nowrap text-overflow-ellipsis h-[28px]"
+                      dangerouslySetInnerHTML={{ __html: blog?.content }}>
+                    </p>
                     <button
                       onClick={() => blogOpen(blog)}
                       className="text-blue-600 font-medium mt-4 inline-block hover:underline"
@@ -119,6 +129,7 @@ const HomePage = () => {
                     </button>
                   </div>
                 </div>
+                </>
               );
             })}
         </div>

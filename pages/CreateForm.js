@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 import { AiOutlineArrowLeft } from "react-icons/ai";
+import Link from "next/link";
 const Editor = dynamic(() => import('../components/TextEditor'), { ssr: false });
 
 const Createform = () => {
@@ -51,10 +52,10 @@ const Createform = () => {
  
   return (
     <div className="p-8 ml-44 mt-24 mb-12">
-      <a href="/" className="flex gap-2 items-center mb-4">
+      <Link to="/" className="flex gap-2 items-center mb-4">
         <AiOutlineArrowLeft className="items-center" />
         Back
-      </a>
+      </Link>
       <div className="text-3xl mb-2">Create Blog</div>
       <form onSubmit={handleSubmit} className="mt-4">
         <div className="mb-4">

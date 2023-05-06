@@ -5,6 +5,7 @@ import Comment from "./api/comments";
 import { useRouter } from 'next/router';
 import axios from "axios";
 import { BsFillArrowLeftCircleFill, AiOutlineArrowLeft } from "react-icons/ai";
+import Link from "next/link";
 
 function BlogDetails(post) {
   const [name, setName] = useState("");
@@ -28,9 +29,9 @@ function BlogDetails(post) {
   return (
     <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 pt-40">
       <div className="max-w-6xl mx-auto">
-        <a href="/" className="flex gap-2 items-center mb-4">
+        <Link to="/" className="flex gap-2 items-center mb-4">
           <AiOutlineArrowLeft className="items-center" />Back
-        </a>
+        </Link>
         <h1 className="text-3xl font-bold text-gray-900 mb-4">
           {blogData?.title}
         </h1>

@@ -1,7 +1,7 @@
 import "@/styles/globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-
+import "../components/All.css";
 function App({ Component, pageProps }) {
   return (
     <>
